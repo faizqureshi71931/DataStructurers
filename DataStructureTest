@@ -1,0 +1,110 @@
+package Simpleproject;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.TreeSet;
+
+public class DataStructureTest {
+    public static void main(String[] args) {
+        // Test case for 1-100 elements
+        int[] elements = generateElements(1, 100);
+
+        // ArrayList
+        long arrayListStartTime = System.nanoTime();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int element : elements) {
+            arrayList.add(element);
+        }
+        long arrayListEndTime = System.nanoTime();
+        System.out.println("ArrayList (1-100): " + (arrayListEndTime - arrayListStartTime) + " ns");
+
+        // LinkedList
+        long linkedListStartTime = System.nanoTime();
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        for (int element : elements) {
+            linkedList.add(element);
+        }
+        long linkedListEndTime = System.nanoTime();
+        System.out.println("LinkedList (1-100): " + (linkedListEndTime - linkedListStartTime) + " ns");
+
+        // HashMap
+        long hashMapStartTime = System.nanoTime();
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int element : elements) {
+            hashMap.put(element, element);
+        }
+        long hashMapEndTime = System.nanoTime();
+        System.out.println("HashMap (1-100): " + (hashMapEndTime - hashMapStartTime) + " ns");
+
+        // TreeSet
+        long treeSetStartTime = System.nanoTime();
+        TreeSet<Integer> treeSet = new TreeSet<>();
+        for (int element : elements) {
+            treeSet.add(element);
+        }
+        long treeSetEndTime = System.nanoTime();
+        System.out.println("TreeSet (1-100): " + (treeSetEndTime - treeSetStartTime) + " ns");
+
+        System.out.println();
+
+        // Example cases for larger sizes (1000, 10000, 1000000)
+        int[] exampleSizes = {1000, 10000, 1000000};
+
+        for (int size : exampleSizes) {
+            elements = generateElements(1, size);
+
+            // ArrayList
+            arrayListStartTime = System.nanoTime();
+            arrayList = new ArrayList<>();
+            for (int element : elements) {
+                arrayList.add(element);
+            }
+            arrayListEndTime = System.nanoTime();
+            System.out.println("ArrayList (" + size + " elements): " + (arrayListEndTime - arrayListStartTime) + " ns");
+
+            // LinkedList
+            linkedListStartTime = System.nanoTime();
+            linkedList = new LinkedList<>();
+            for (int element : elements) {
+                linkedList.add(element);
+            }
+            linkedListEndTime = System.nanoTime();
+            System.out.println("LinkedList (" + size + " elements): " + (linkedListEndTime - linkedListStartTime) + " ns");
+
+            // HashMap
+            hashMapStartTime = System.nanoTime();
+            hashMap = new HashMap<>();
+            for (int element : elements) {
+                hashMap.put(element, element);
+            }
+            hashMapEndTime = System.nanoTime();
+            System.out.println("HashMap (" + size + " elements): " + (hashMapEndTime - hashMapStartTime) + " ns");
+
+            // TreeSet
+            treeSetStartTime = System.nanoTime();
+            treeSet = new TreeSet<>();
+            for (int element : elements) {
+                treeSet.add(element);
+            }
+            treeSetEndTime = System.nanoTime();
+            System.out.println("TreeSet (" + size + " elements): " + (treeSetEndTime - treeSetStartTime) + " ns");
+
+            System.out.println();
+        }
+    }    
+            private static int[] generateElements(int start, int end) {
+                int[] elements = new int[end - start + 1];
+                for (int i = 0; i < elements.length; i++) {
+                    elements[i] = start + i;
+                }
+                return elements;
+            }
+
+        
+    }
+
+
+  
+
