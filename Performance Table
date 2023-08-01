@@ -1,0 +1,54 @@
+package Simpleproject;
+
+import java.util.*; 
+
+public class PerformanceTable {
+    private static final int NUM_ELEMENTS = 1_000_000;
+    private static final int NUM_ITERATIONS = 10; // Number of iterations for accurate measurement
+
+    public static void main(String[] args) {
+        List<Integer> linkedList = new LinkedList<>();
+        Map<Integer, Integer> hashMap = new HashMap<>();
+
+        // Fill the linked list and hash map with elements
+        for (int i = 0; i < NUM_ELEMENTS; i++) {
+            linkedList.add(i);
+            hashMap.put(i, i);
+        }
+
+        System.out.println("Operation\tLinkedList (ms)\tHashMap (ms)");
+
+        // Perform get operation
+        long linkedListGetTime = measureTime(() -> linkedList.get(NUM_ELEMENTS / 2));
+        long hashMapGetTime = measureTime(() -> hashMap.get(NUM_ELEMENTS / 2));
+        System.out.println("Get\t\t" + linkedListGetTime + "\t\t" + hashMapGetTime);
+
+        // Perform set operation
+        long linkedListSetTime = measureTime(() -> linkedList.set(NUM_ELEMENTS / 2, -1));
+        long hashMapSetTime = measureTime(() -> hashMap.put(NUM_ELEMENTS / 2, -1));
+        System.out.println("Set\t\t" + linkedListSetTime + "\t\t" + hashMapSetTime);
+
+        // Perform remove operation
+        long linkedListRemoveTime = measureTime(() -> linkedList.remove(NUM_ELEMENTS / 2));
+        long hashMapRemoveTime = measureTime(() -> hashMap.remove(NUM_ELEMENTS / 2));
+        System.out.println("Remove\t\t" + linkedListRemoveTime + "\t\t" + hashMapRemoveTime);
+
+        // Perform insert operation
+        long linkedListInsertTime = measureTime(() -> linkedList.add(NUM_ELEMENTS / 2, -1));
+        long hashMapInsertTime = measureTime(() -> hashMap.put(NUM_ELEMENTS / 2, -1));
+        System.out.println("Insert\t\t" + linkedListInsertTime + "\t\t" + hashMapInsertTime);
+    }
+
+    private static long measureTime(Runnable operation) {
+        long totalTime = 0;
+
+        for (int i = 0; i < NUM_ITERATIONS; i++) {
+            long startTime = System.currentTimeMillis();
+            operation.run();
+            long endTime = System.currentTimeMillis();
+            totalTime += endTime - startTime;
+        }
+
+        return totalTime / NUM_ITERATIONS; // Average time over multiple iterations
+    }
+}
